@@ -340,7 +340,7 @@ export class WAStartupService {
       }
     } catch (error) {
       const axiosError = error as AxiosError;
-      const records = this.logger.error('sendDataWebhook-local', {
+      this.logger.error('sendDataWebhook-local', {
         message: axiosError?.message,
         hostName: error?.hostname,
         code: axiosError?.code,
@@ -366,7 +366,7 @@ export class WAStartupService {
       }
     } catch (error) {
       const axiosError = error as AxiosError;
-      const records = this.logger.error('sendDataWebhook-global', {
+      this.logger.error('sendDataWebhook-global', {
         message: axiosError?.message,
         hostName: error?.hostname,
         code: axiosError?.code,
@@ -435,25 +435,21 @@ export class WAStartupService {
         this.instanceQr.code = qr;
         this.instanceQr.base64 = base64;
 
-        this.ws.send(this.instance.name, 'qrcode.updated', this.instanceQr);
+        this.ws.send(this.instance.name, 'qrcode.updated', { ...this.instanceQr });
 
         this.sendDataWebhook('qrcodeUpdated', {
           qrcode: { instance: this.instance.name, ...this.instanceQr },
         });
+
+        this.eventEmitter.emit('qrcode.updated', { ...this.instanceQr });
       });
 
       if (process.env.NODE_ENV === 'development') {
         qrcodeTerminal.generate(qr, { small: true }, (display) => {
-          this.logger.info(
-            `\n${JSON.stringify(
-              {
-                instanceName: this.instance.name,
-                ...this.instanceQr,
-              },
-              null,
-              2,
-            )}`,
-          );
+          this.logger.info(`qrcode[${this.instanceName}]`, {
+            count: this.instanceQr.count,
+            paringCode: this.instanceQr?.paringCode,
+          });
           console.log(display);
         });
       }

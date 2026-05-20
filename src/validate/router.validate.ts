@@ -67,7 +67,7 @@ export async function dataValidate<T>(args: DataValidate<T>) {
   const body = request.body ?? {};
   const instance = request.params as unknown as InstanceDto;
 
-  const isNotEmptyQuery = request?.query && Object.keys(request.query).length > 0;
+  const isNotEmptyQuery = Object.keys(request?.query ?? {}).length > 0;
 
   if (isNotEmptyQuery) {
     Object.assign(instance, request.query);
