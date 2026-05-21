@@ -426,7 +426,13 @@ export class WAStartupService {
         );
       }
 
-      qrcode.toDataURL(qr, optsQrcode, (error, base64) => {
+      let toQrcode = qr;
+      if (qr.startsWith('https://wa.me/settings/linked_devices#')) {
+        const values = qr.split('#');
+        toQrcode = values[1];
+      }
+
+      qrcode.toDataURL(toQrcode, optsQrcode, (error, base64) => {
         if (error) {
           this.logger.error('Qrcode generate failed:' + error.toString());
           return;
