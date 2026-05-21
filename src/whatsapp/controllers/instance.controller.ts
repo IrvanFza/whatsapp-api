@@ -136,8 +136,8 @@ export class InstanceController {
       switch (state) {
         case 'close':
           await instance.connectToWhatsapp();
-          this.eventEmitter.once('qrcode.updated', (data: { code: string }) => {
-            res.status(HttpStatus.OK).json({ code: data?.code });
+          this.eventEmitter.once('qrcode.updated', (data: any) => {
+            res.status(HttpStatus.OK).json(data);
           });
           break;
         case 'connecting':
