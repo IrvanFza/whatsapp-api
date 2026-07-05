@@ -550,10 +550,7 @@ export class WAStartupService {
     this.authState = await this.defineAuthState();
 
     const { version } = fetchLatestBaileysVersionV2();
-    const session = this.configService.get<ConfigSessionPhone>('CONFIG_SESSION_PHONE');
-    const browser: WABrowserDescription = !this.phoneNumber
-      ? [session.CLIENT, session.NAME, release()]
-      : Browsers.macOS('Chrome');
+    const browser: WABrowserDescription = Browsers.macOS('Chrome');
 
     let { EXPIRATION_TIME } = this.configService.get<QrCode>('QRCODE');
     const CONNECTION_TIMEOUT = this.configService.get<number>('CONNECTION_TIMEOUT');
