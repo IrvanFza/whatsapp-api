@@ -59,7 +59,7 @@ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 * Installing Node.js using NVM, a version manager that allows us to switch between different versions of Node.js easily.
 
 ```sh
-nvm install 20
+nvm install 24
 ```
 
 ### 4. pm2 installation
@@ -81,7 +81,7 @@ Go to the project directory and install all dependencies.
 >
 
 ```sh
-cd whatsapp-api-v2
+cd whatsapp-api
 
 npm install
 # or
