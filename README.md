@@ -15,7 +15,7 @@
 ## [Go API](https://github.com/code-chat-br/whatsapp-api-go)
 
 <div>
-  <a href="https://app.picpay.com/user/cleber.wilson.oliveira" target="_blank" rel="noopener noreferrer">
+  <a href="https://github.com/code-chat-br/whatsapp-api-go" target="_blank" rel="noopener noreferrer">
     <img src="./public/images/go-api.png" style="width: 50% !important;">
   </a>
 </div
